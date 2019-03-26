@@ -1,0 +1,99 @@
+---
+title: git and github.com
+output:
+  beamer_presentation:
+    theme: metropolis
+---
+```{r config, include=FALSE}
+library(knitr)
+opts_chunk$set(echo=FALSE)
+sapply(list.files("src", "*.gv", full.names = TRUE), crotchet::read_graphviz_chunk)
+```
+
+# Dropbox Sync
+
+```{r dropbox, engine="dot"}
+```
+
+# Github Sync
+
+```{r github, engine="dot"}
+```
+
+# git remotes
+
+```{r git, engine="dot"}
+```
+
+# git vocabulary
+
+pull
+: Receive changes (edits, new files, files removed).
+
+push
+: Send changes to another computer.
+
+clone
+: Download an existing repo, e.g. from github.com. "The first pull."
+
+repo
+: Folder of files to track, with a ".git/" database of revisions.
+
+# git vocabulary
+
+add
+: Mark a changed file as ready to commit. Moves an edit to the staging area.
+
+staging
+: A waiting area for edits before they are commited.
+
+commit
+: Bundle edits together. Needs a commit message. Moves edits from the staging area into 
+  the .git/ database. A commit is the standard unit of time in git.
+
+checkout
+: Update the files in your working directory to what they were at a particular commit.
+
+# Vocabulary
+
+push
+: Send new commits in my .git/ database to a different computer (like
+  github.com).
+  
+If the .git/ database on the other computer has different commits, the push is aborted.
+
+pull
+: Receive new commits to my .git/ database.
+
+If the .git/ database on the other computer has different commits, git will try to merge those changes, but if there is a merge conflict, you must throw away your computer.
+
+# Classroom workflow
+
+**Get an assignment**  
+`[click link to github classroom assignment]`  
+`git clone https://github.com/...`
+
+**Get an update to an assignment**  
+`git pull`
+
+**Submit an assignment**
+
+1. `git add [files]`
+2. `git commit [describe changes]`
+3. `git push`
+
+# git areas
+
+![](img/git-areas.png)
+
+# Why learn git?
+
+"Move fast and break things" mentality.  
+Multiple versions of files without having multiple files.  
+Reproducibility.  
+Open science.
+
+# Brace yourselves!
+
+[Pro Git](https://git-scm.com/)  
+[Oh, shit! Git](http://ohshitgit.com/)

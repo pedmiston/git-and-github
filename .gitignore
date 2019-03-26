@@ -1,0 +1,6 @@
+*.pdf
+!slides/*.pdf
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata

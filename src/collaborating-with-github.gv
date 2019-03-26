@@ -1,0 +1,17 @@
+digraph {
+  label="Collaborating with GitHub.com"
+  fontname=helvetica
+  labelloc=t
+  node[fontname=helvetica shape=none]
+  edge[fontname=helvetica]
+  rankdir=LR
+  player1[label="player 1"]
+  player2[label="player 2"]
+  github[label="github.com"]
+  player1:w -> player1:n[label="commit"]
+  player2:e -> player2:n[label="commit"]
+  player1:ne -> github:nw[label="push"]
+  github:sw -> player1:se[xlabel="pull"]
+  github:ne -> player2:nw[dir=back label="push"]
+  player2:sw -> github:se[dir=back xlabel="pull"]
+}

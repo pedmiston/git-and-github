@@ -1,0 +1,9 @@
+digraph {
+  node[fontname=helvetica shape=none]
+  edge[fontname=helvetica]
+  rankdir=LR
+  laptop[label="laptop"]
+  dropbox[label="dropbox.com"]
+  laptop:ne -> dropbox:nw
+  dropbox:sw -> laptop:se
+}

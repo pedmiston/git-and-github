@@ -1,0 +1,9 @@
+digraph {
+  node[fontname=helvetica shape=none]
+  edge[fontname=helvetica]
+  rankdir=LR
+  laptop[label="laptop"]
+  dropbox[label="github.com"]
+  laptop:ne -> dropbox:nw[label="push"]
+  dropbox:sw -> laptop:se[xlabel="pull"]
+}
