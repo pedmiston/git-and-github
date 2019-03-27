@@ -6,10 +6,9 @@ output:
     template: style/beamer.tex
     includes:
       in_header: style/header.tex
-    keep_tex: yes
 ---
 
-# Verify git
+# Verify that git is installed and configured
 
 Open a terminal and type the following commands to verify that
 your installation of git is installed and configured properly.
@@ -19,18 +18,17 @@ git config --help  # read some of the help text
 git config --list  # list the configured variables
 ```
 
-You should see your `user.name` and `user.email` in the output.
+You should see your `user.name` and `user.email` in the output. If not,
+follow the steps in this video[^get_going].
+
+[^get_going]: [git-scm.com/video/get-going](https://git-scm.com/video/get-going)
 
 # Configuring `git`
 
-The only required steps for using `git` are defining a `user.name` and
-`user.email`.
+* The only required steps are to define a `user.name` and `user.email`.
+* The "git user" is the author of the changes you make.
 
-Your `user.name` and `user.email` are recorded in the change history of your
-files tracked with `git`. The git user is the author of the changes you make.
-
-You may use different usernames and emails to connect to different accounts,
-e.g., GitHub, GitLab, BitBucket.
+\vspace{1em}
 
 **Why don't you need to define a `user.password` configuration variable to use
 `git`?**
@@ -40,16 +38,16 @@ e.g., GitHub, GitLab, BitBucket.
 When using `git`, you will need a text editor to write commit messages.
 
 You should learn how to use a command line text editor like nano or vim, or
-use a text editor that `git` can be configured to work with.
-
-Here is how to configure `git` to use the text editor "atom":
+download a text editor that `git` can be configured to work with.
 
 ```bash
+# configure git to use the text editor "atom"
 git config --global core.editor "atom --wait"
 ```
 
-See [this help article](https://help.github.com/en/articles/associating-text-editors-with-git)
-for instructions on how to configure `git` to use other common text editors like Sublime, TextMate, and Notepad++.
+\small See this help article[^text_editors] for instructions on how to configure `git` to use other common text editors like Sublime, TextMate, and Notepad++.
+
+[^text_editors]: [help.github.com/en/articles/associating-text-editors-with-git](https://help.github.com/en/articles/associating-text-editors-with-git)
 
 # Create a new git repo
 
@@ -109,8 +107,8 @@ git status   # check the status of an empty repo
 Create an empty text file in the proj1 directory.
 
 ```bash
-touch first-file.txt  # Create an empty file
-git status            # Run this command after each step
+touch first-file.txt  # create an empty file
+git status            # run this command after each step
 ```
 
 Follow the steps described in the output of the git status command
@@ -125,7 +123,7 @@ git status
 
 Create a commit by entering a commit message:
 
-```
+```bash
 git commit  # opens an editor to write the commit message
 ```
 
@@ -135,34 +133,46 @@ save, and close the file.
 # Writing a commit message from the command line
 
 * Alternately, you can enter the commit message from the command line.
-* This is best for small changes that can be described well in a few
-  words.
-* For describing larger changes you will want to use a text
-  editor.
+* Best for small changes that can be described in a few words.
+* To describe larger changes you will want to use a text editor.
+
+\vspace{1em}
 
 ```bash
 git commit -m "Added an empty text file"
 ```
+
+\vspace{1em}
+
+**All commits must have messages. This is a fundamental difference between
+"committing" and "saving".**
 
 # Viewing the commit history
 
 After creating your first commit, run the following commands, and
 try to understand the output.
 
-```
+\vspace{1em}
+
+```bash
 git status
 git log
+git log --oneline
 ```
 
 # Starting a second commit
 
 Create two more empty files to commit to the repo.
 
+\vspace{1em}
+
 ```bash
 touch second-file.txt third-file.txt
 ```
 
-> Continue to run `git status` after each step to verify what is going on.
+\vspace{1em}
+
+Continue to run `git status` after each step to verify what is going on.
 
 # Methods for adding files
 
@@ -198,18 +208,12 @@ git status
 You will most often need this when you run `git add .` and realize you added
 something you did not want to.
 
-# `git` areas
-
-Once a change is committed to the git database, it is considered permanent.
-
-![](img/git-areas.png)
-
 # Authoring the second commit
 
 Commit the two new files to the repo:
 
 ```bash
-git status  # Make sure the two files are staged
+git status  # make sure the two files are staged
 git commit -m "Add two new empty files"
 git status
 git log
@@ -221,23 +225,65 @@ To delete a file from a git repo, you need to mark it as purposefully
 removed with `git rm [file]`.
 
 ```bash
-rm second-file.txt     # Remove the file
+rm second-file.txt     # remove the file
 git status
-git rm second-file.txt # Mark as purposefully removed
+git rm second-file.txt # mark as purposefully removed
 git status
 git commit -m "Removed the second file"
+git log
+git log --oneline
 ```
 
-> You don't have to run both `rm [file]` and `git rm [file]`. `git rm [file]`
-  will remove the file too, if it exists.
+\small You don't have to run both `rm [file]` and `git rm [file]`.  
+`git rm [file]` will remove the file too, if it exists.
+
+# `git` areas
+
+Once a change is committed to the git database, it is considered permanent.  
+It is possible to undue things that are permanent, but it's harder.
+
+![](img/git-areas.png)
+
+
+# Go back in time
+
+With `git` we can always roll back time to whatever commit we want.
+
+\vspace{1em}
+
+```bash
+git log --oneline
+# copy the SHA of the commit with the message:
+# "Add two new empty files"
+git checkout [SHA]  # roll back to that commit
+ls  # notice the deleted file "second-file.txt"
+git log
+git checkout master  # go back to present
+ls  # notice "second-file.txt" has been deleted
+git log
+```
+
+# Get a file you once deleted
+
+Using the same SHA from the previous step, provide
+an additional argument to `git checkout` to retrieve
+a file you once deleted.
+
+\vspace{1em}
+
+```bash
+git checkout [SHA] second-file.txt
+git status
+git commit -m "Revived second file"
+```
 
 # Creating a presentation
 
-Remove the remaining empty files and create a new one for a presentation.
+Remove all empty files and create a new one for a presentation.
 
 ```bash
 git rm *-file.txt
-git commit -m "Removed the two empty files"
+git commit -m "Removed all empty files"
 touch presentation.Rmd
 ```
 
@@ -443,7 +489,7 @@ git status  # On branch new-intro
 
 Edit the results plot on the new-intro branch.
 
-```
+```R
 ggplot(df) +
   aes(x, y, size = error) +
   geom_point(shape = 1) +
@@ -451,7 +497,12 @@ ggplot(df) +
               show.legend = FALSE)
 ```
 
+\vspace{1em}
+
+Commit the changes to the plot.
+
 ```bash
+git diff
 git commit -am "Scale points by error and add regression line"
 ```
 
@@ -461,19 +512,21 @@ git commit -am "Scale points by error and add regression line"
 git checkout master
 ```
 
-Edit presentation.Rmd to adjust the plot
+Edit presentation.Rmd to adjust the plot,
+simulating the merge conflict.
 
-```
-# contents of presentation.Rmd
-# ...
+```R
 ggplot(df) +
-  aes(x, y, size = error) +
-  geom_point(shape = 1) +
+  aes(x, y) +
+  geom_point(alpha = 0.4) +
   geom_smooth(method = "lm", se = FALSE,
               show.legend = FALSE)
 ```
 
 # Add a conclusion slide
+
+While still on the master branch, also add a Conclusion slide
+that is independent of the plot.
 
 ```
 # Conclusion
@@ -482,6 +535,8 @@ It takes 100 changes to
 change a change detector's
 change detection rate!
 ```
+
+\vspace{1em}
 
 Commit the changes on the master branch.
 
@@ -551,7 +606,7 @@ Open presentation.Rmd and read the merge conflict. It should make sense to you n
 
 # Fix the conflict
 
-Replace the conflict in the plot with a merged version:
+Replace the conflict (including `<<<<<<< HEAD` and `>>>>>>> new-intro`) with a merged version:
 
 ```
 ggplot(df) +
@@ -565,21 +620,75 @@ Mark the merge as completed.
 
 ```bash
 git add presentation.Rmd
-git commit
+git commit  # note the different default message
 git log
 ```
 
 # Collaborating
 
-To allow others to collaborate on this project, we can create a remote destination for the repo on github.
+To allow others to collaborate on a project, we can make the repo available on a site that allows
+free hosting of repos, like GitHub, GitLab, or BitBucket.
+
+To collaborate on someone else's project, use the `git clone ...` command:
+
+```bash
+cd ~/Desktop
+# clone the repo containing these slides
+git clone https://github.com/pedmiston/git-and-github.git
+cd git-and-github
+open slides/version-control.pdf
+```
+
+**Why don't you need to provide a GitHub username or password to download
+these materials?**
+
+# Create a private repo and clone it
 
 * Login to github.com, select "New repository" from the "+" menu.
-* Give your repo a name.
+* Give your repo a dummy name like "private-proj"
+* Select the radio option to make the repo "Private"
+* Check the box "Initialize this repository with a README".
+* Select the button to "Create the repository"
+
+Then clone the newly created repo to your computer.
+
+\vspace{1em}
+
+\small
+
+```bash
+cd ~/Desktop
+git clone https://github.com/[username]/[private-proj].git
+# now you should have to provide your GitHub credentials
+cd [private-proj]
+cat README.md
+git status
+```
+
+# Creating an endpoint for your local repo
+
+Now we will configure your existing proj1 to push to GitHub.
+
+* Login to github.com, select "New repository" from the "+" menu.
+* Give your repo a temporary name, like `proj1`.
+* Select the radio option to make the repo Public.
 * For the option "Initialize this repository with a README", note the question
   says "Skip this step if you’re importing an existing repository." Since we
   are importing an existing repository, you should not check this box.
-* Follow the steps for "push an existing repository from the command line" on
-  the homepage for the repo you just created.
+
+# Pushing your repo to GitHub
+
+After creating the repo, follow the steps for "push an existing repository from the command line" on
+the newly created repo page.
+  
+\vspace{1em}
+
+```bash
+cd ~/Desktop/proj1
+git remote add origin https://github.com/[username]/proj1.git
+git push -u origin master
+```
+
+\vspace{1em}
 
 After running the `git push ...` command from the terminal, refresh the page, and you should see your repo online for someone to clone.
-

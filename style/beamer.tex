@@ -32,6 +32,12 @@ $for(classoption)$
   $classoption$$sep$,
 $endfor$
 ]{$documentclass$}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true
+}
+
 $if(beamer)$
 $if(background-image)$
 \usebackgroundtemplate{%
