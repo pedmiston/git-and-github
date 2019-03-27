@@ -8,6 +8,13 @@ output:
       in_header: style/header.tex
 ---
 
+# Why learn git?
+
+"Move fast and break things" mentality.  
+Multiple versions of files without having multiple files.  
+Reproducibility.  
+Open science.
+
 # Verify that git is installed and configured
 
 Open a terminal and type the following commands to verify that
@@ -692,3 +699,8 @@ git push -u origin master
 \vspace{1em}
 
 After running the `git push ...` command from the terminal, refresh the page, and you should see your repo online for someone to clone.
+
+# Brace yourselves!
+
+[Pro Git](https://git-scm.com/)  
+[Oh, shit! Git](http://ohshitgit.com/)

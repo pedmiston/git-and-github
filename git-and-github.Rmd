@@ -36,16 +36,10 @@ push
 clone
 : Download an existing repo, e.g. from github.com. "The first pull."
 
-repo
-: Folder of files to track, with a ".git/" database of revisions.
-
 # git vocabulary
 
 add
 : Mark a changed file as ready to commit. Moves an edit to the staging area.
-
-staging
-: A waiting area for edits before they are commited.
 
 commit
 : Bundle edits together. Needs a commit message. Moves edits from the staging area into 
@@ -65,35 +59,8 @@ If the .git/ database on the other computer has different commits, the push is a
 pull
 : Receive new commits to my .git/ database.
 
-If the .git/ database on the other computer has different commits, git will try to merge those changes, but if there is a merge conflict, you must throw away your computer.
-
-# Classroom workflow
-
-**Get an assignment**  
-`[click link to github classroom assignment]`  
-`git clone https://github.com/...`
-
-**Get an update to an assignment**  
-`git pull`
-
-**Submit an assignment**
-
-1. `git add [files]`
-2. `git commit [describe changes]`
-3. `git push`
+If the .git/ database on the other computer has different commits, git will try to merge those changes, but if there is a merge conflict, you will have to resolve the conflict.
 
 # git areas
 
 ![](img/git-areas.png)
-
-# Why learn git?
-
-"Move fast and break things" mentality.  
-Multiple versions of files without having multiple files.  
-Reproducibility.  
-Open science.
-
-# Brace yourselves!
-
-[Pro Git](https://git-scm.com/)  
-[Oh, shit! Git](http://ohshitgit.com/)
